@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name            = "smartraffic"
+version         = "0.1.0"
+description     = "DCRNN-based real-time traffic flow prediction for smart cities"
+readme          = "README.md"
+license         = { text = "MIT" }
+requires-python = ">=3.10"
+keywords        = ["traffic", "graph neural network", "DCRNN", "smart city", "forecasting"]
+
+dependencies = [
+    "torch>=2.1.0",
+    "torch-geometric>=2.4.0",
+    "numpy>=1.24.0",
+    "scipy>=1.11.0",
+    "scikit-learn>=1.3.0",
+    "pandas>=2.0.0",
+    "networkx>=3.1",
+    "fastapi>=0.104.0",
+    "uvicorn[standard]>=0.24.0",
+    "websockets>=12.0",
+    "folium>=0.15.0",
+    "plotly>=5.18.0",
+    "h5py>=3.9.0",
+    "tqdm>=4.66.0",
+    "loguru>=0.7.2",
+    "rich>=13.6.0",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "jupyter>=1.0.0",
+    "ipykernel>=6.25.0",
+    "matplotlib>=3.7.0",
+    "seaborn>=0.12.0",
+]
+
+[project.scripts]
+smartraffic-train     = "train:main"
+smartraffic-dashboard = "dashboard:main"
+smartraffic-graph     = "src.build_graph:main"
+
+[tool.pytest.ini_options]
+testpaths   = ["tests"]
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+select = ["E", "F", "I", "N", "W"]
